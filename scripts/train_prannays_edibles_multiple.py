@@ -5,6 +5,7 @@ logging.basicConfig(level=logging.INFO)
 
 def main():
     wandb_api_key = input("Enter wandb API key: ")
+    wandb_enabled = wandb_api_key != 'no'
 
     epochs = 20
     params_to_try = [
@@ -20,7 +21,7 @@ def main():
     ]
     for params_dict in params_to_try:
         logging.info("Starting try for params: %s", params_dict)
-        train_prannays_edibles(wandb_api_key, epochs=epochs, recreate_split_dataset=True, **params_dict)
+        train_prannays_edibles(wandb_api_key, epochs=epochs, recreate_split_dataset=True, wandb_enabled=wandb_enabled, **params_dict)
 
 
 if __name__ == '__main__':
