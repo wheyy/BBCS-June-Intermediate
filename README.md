@@ -16,3 +16,4 @@ Group H2
     ```
     jupyter notebook
     ```
+1. Make sure to download Prannay's Edibles dataset and place it (the 0,1,2,3... folders) in a folder called prannays_edibles in datasets/
