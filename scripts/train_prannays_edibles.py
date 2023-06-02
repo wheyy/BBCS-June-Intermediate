@@ -56,7 +56,7 @@ def train_model(model: YOLO, dataset_path: str, epochs: int, batch: int, save_pe
 def init_wandb(api_key: str, project_name: str):
     logging.info("init_wandb running")
     os.environ["WANDB_API_KEY"] = api_key
-    wandb.init(project=project_name, settings=wandb.Settings(start_method="spawn"), mode='disabled')
+    wandb.init(project=project_name, settings=wandb.Settings(start_method="spawn"), mode='online')
 
 
 def init_model(reset=True):
