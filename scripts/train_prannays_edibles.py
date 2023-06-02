@@ -12,7 +12,7 @@ import wandb
 
 cwd = Path.cwd()
 
-def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, train_split_percentage=0.7, recreate_split_dataset=False):
+def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, train_split_percentage=0.7, recreate_split_dataset=False, wandb_enabled=True):
     class_name_map = {
         '0': 'bread',
         '1': 'dairy',
@@ -35,7 +35,7 @@ def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, train_split_p
     model = init_model(reset=True)
 
     project_name = 'BuildingBloCS Prannays Edibles Classifier'
-    init_wandb(wandb_api_key, project_name)
+    init_wandb(wandb_api_key, project_name, wandb_enabled)
 
     train_model(
         model=model,
@@ -53,10 +53,10 @@ def train_model(model: YOLO, dataset_path: str, epochs: int, batch: int, save_pe
     model.train(data=dataset_path, batch=batch, epochs=epochs, save_period=save_period)
 
 
-def init_wandb(api_key: str, project_name: str):
+def init_wandb(api_key: str, project_name: str, enabled=True):
     logging.info("init_wandb running")
     os.environ["WANDB_API_KEY"] = api_key
-    wandb.init(project=project_name, settings=wandb.Settings(start_method="spawn"), mode='online')
+    wandb.init(project=project_name, settings=wandb.Settings(start_method="spawn"), mode='online' if enabled else 'disabled')
 
 
 def init_model(reset=True):
