@@ -12,3 +12,7 @@ Group H2
     ```
     conda activate buildingblocs
     ```
+1. Run Jupyter Notebook:
+    ```
+    jupyter notebook
+    ```
