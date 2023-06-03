@@ -59,4 +59,4 @@ def init_model(model_size: str, reset=True):
 if __name__ == '__main__':
     wandb_api_key = input("Enter wandb API key: ")
     wandb_enabled = wandb_api_key != 'no'
-    train_prannays_edibles(wandb_api_key, wandb_enabled=wandb_enabled, recreate_split_dataset=True)
+    train_prannays_edibles(wandb_api_key, wandb_enabled=wandb_enabled)
