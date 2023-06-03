@@ -2,13 +2,13 @@ import logging
 import shutil
 from pathlib import Path
 
-from common import prannays_edibles_class_name_map, food11_class_name_map, prannays_edibles_path, food11_path
+from common import prannays_edibles_class_name_map, food11_class_name_map, prannays_edibles_dataset_path, food11_dataset_path
 
 def main():
     dataset_path = prepare_data(
-        prannays_edibles_path,
+        prannays_edibles_dataset_path,
         prannays_edibles_class_name_map,
-        food11_path,
+        food11_dataset_path,
         food11_class_name_map,
     )
     print(dataset_path)

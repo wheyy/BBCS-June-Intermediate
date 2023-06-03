@@ -33,5 +33,5 @@ food11_class_name_map = {
 cwd = Path.cwd()
 
 datasets_path = cwd / "datasets"
-prannays_edibles_path = datasets_path / "prannays_edibles"
-food11_path = datasets_path / "food11"
+prannays_edibles_dataset_path = datasets_path / "prannays_edibles"
+food11_dataset_path = datasets_path / "food11"
