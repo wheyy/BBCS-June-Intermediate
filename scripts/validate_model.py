@@ -4,7 +4,7 @@ import os
 from ultralytics import YOLO
 import wandb
 
-from common import project_name, cwd, datasets_path
+from common import classifier_project_name, cwd, datasets_path
 
 def main():
     if "WANDB_API_KEY" not in os.environ:
@@ -18,7 +18,7 @@ def main():
 
     if wandb_run_name != "reuse":
         api = wandb.Api()
-        artifact = api.artifact(f'{project_name}/{wandb_run_name}:v0')
+        artifact = api.artifact(f'{classifier_project_name}/{wandb_run_name}:v0')
         artifact.download(wandb_downloaded_artifacts_path)
 
     model_path = wandb_downloaded_artifacts_path / 'best.pt'

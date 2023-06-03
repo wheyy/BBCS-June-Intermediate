@@ -6,3 +6,4 @@ scikit-image
 fastapi[all]
 uvicorn[standard]
 opencv-python
+pyyaml

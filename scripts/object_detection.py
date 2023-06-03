@@ -26,8 +26,8 @@ def main():
 
 def test():
     dataset_path = datasets_path / 'UECFOOD100'
-    image_no = 14927
-    image_class_idx = 94
+    image_no = 11443
+    image_class_idx = 17
     test_image_path = dataset_path / f'{image_class_idx}' / f'{image_no}.jpg'
     
     bb_info_path = dataset_path / f'{image_class_idx}' / 'bb_info.txt'
@@ -67,5 +67,5 @@ Food-related classes:
 
 
 if __name__ == '__main__':
-    main()
-    # test()
+    # main()
+    test()
