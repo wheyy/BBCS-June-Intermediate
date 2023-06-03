@@ -7,7 +7,7 @@ from ultralytics import YOLO
 import wandb
 
 from split_data import create_image_classify_data_split_folder
-from common import class_name_map, prannays_edibles_path
+from common import class_name_map, prannays_edibles_path, project_name
 
 logging.basicConfig(level=logging.INFO)
 
@@ -16,7 +16,6 @@ def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, train_split_p
 
     model = init_model(reset=True)
 
-    project_name = 'BuildingBloCS Prannays Edibles Classifier'
     init_wandb(wandb_api_key, project_name, wandb_enabled)
 
     train_model(

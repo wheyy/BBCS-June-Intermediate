@@ -1,5 +1,7 @@
 from pathlib import Path
 
+project_name = 'BuildingBloCS Prannays Edibles Classifier'
+
 class_name_map = {
     '0': 'bread',
     '1': 'dairy',
