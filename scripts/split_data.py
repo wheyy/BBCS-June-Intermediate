@@ -5,12 +5,12 @@ from pathlib import Path
 from torch.utils.data import random_split
 from torchvision import datasets
 
-from common import prannays_edibles_path, class_name_map
+from common import prannays_edibles_path, prannays_edibles_class_name_map
 
 def main():
     split_dataset_path = create_image_classify_data_split_folder(
         prannays_edibles_path,
-        class_name_map,
+        prannays_edibles_class_name_map,
         train_split_percentage=0.7,
         recreate=True
     )
