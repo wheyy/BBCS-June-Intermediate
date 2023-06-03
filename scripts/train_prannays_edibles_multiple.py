@@ -7,7 +7,7 @@ def main():
     wandb_api_key = input("Enter wandb API key: ")
     wandb_enabled = wandb_api_key != 'no'
 
-    epochs = 15
+    epochs = 20
     params_to_try = [
         {
             'model_size': 'n',
