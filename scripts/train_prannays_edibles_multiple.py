@@ -10,11 +10,8 @@ def main():
     epochs = 20
     params_to_try = [
         {
-            'batch': 2,
-        },
-        {
-            'batch': 4,
-        },
+            'model_size': 'l'
+        }
     ]
     for params_dict in params_to_try:
         logging.info("Starting try for params: %s", params_dict)

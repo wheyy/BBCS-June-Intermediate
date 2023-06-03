@@ -11,10 +11,10 @@ from common import class_name_map, prannays_edibles_path
 
 logging.basicConfig(level=logging.INFO)
 
-def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, train_split_percentage=0.7, recreate_split_dataset=False, wandb_enabled=True):
+def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, train_split_percentage=0.7, recreate_split_dataset=False, wandb_enabled=True, model_size='n'):
     split_dataset_path = create_image_classify_data_split_folder(prannays_edibles_path, class_name_map, train_split_percentage=train_split_percentage, recreate=recreate_split_dataset)
 
-    model = init_model(reset=True)
+    model = init_model(model_size, reset=True)
 
     project_name = 'BuildingBloCS Prannays Edibles Classifier'
     init_wandb(wandb_api_key, project_name, wandb_enabled)
@@ -42,12 +42,13 @@ def init_wandb(api_key: str, project_name: str, enabled=True):
     wandb.init(project=project_name, settings=wandb.Settings(start_method="spawn"), mode='online' if enabled else 'disabled')
 
 
-def init_model(reset=True):
+def init_model(model_size: str, reset=True):
     logging.info("init_model running")
-    model_path = Path('yolov8n-cls.pt')
+    model_name = f'yolov8{model_size}-cls.pt'
+    model_path = Path(model_name)
     if reset and model_path.exists():
         model_path.unlink()
-    model = YOLO('yolov8n-cls.pt') # load pretrained model
+    model = YOLO(model_name) # load pretrained model
     return model
 
 
