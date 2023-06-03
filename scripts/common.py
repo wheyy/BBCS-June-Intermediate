@@ -1,6 +1,8 @@
 from pathlib import Path
 
-class_name_map = {
+project_name = 'BuildingBloCS Prannays Edibles Classifier'
+
+prannays_edibles_class_name_map = {
     '0': 'bread',
     '1': 'dairy',
     '2': 'dessert',
@@ -14,7 +16,22 @@ class_name_map = {
     '10': 'vegetables',
 }
 
+food11_class_name_map = {
+    'Bread': 'bread',
+    'Dairy product': 'dairy',
+    'Dessert': 'dessert',
+    'Egg': 'egg',
+    'Fried food': 'fried',
+    'Meat': 'meat',
+    'Noodles-Pasta': 'pasta',
+    'Rice': 'rice',
+    'Seafood': 'seafood',
+    'Soup': 'soup',
+    'Vegetable-Fruit': 'vegetables'
+}
+
 cwd = Path.cwd()
 
 datasets_path = cwd / "datasets"
 prannays_edibles_path = datasets_path / "prannays_edibles"
+food11_path = datasets_path / "food11"

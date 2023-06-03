@@ -6,22 +6,26 @@ import torch
 from ultralytics import YOLO
 import wandb
 
-from split_data import create_image_classify_data_split_folder
-from common import class_name_map, prannays_edibles_path
+from prepare_data import prepare_data
+from common import prannays_edibles_class_name_map, food11_class_name_map, prannays_edibles_path, food11_path, project_name
 
 logging.basicConfig(level=logging.INFO)
 
-def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, train_split_percentage=0.7, recreate_split_dataset=False, wandb_enabled=True, model_size='n'):
-    split_dataset_path = create_image_classify_data_split_folder(prannays_edibles_path, class_name_map, train_split_percentage=train_split_percentage, recreate=recreate_split_dataset)
+def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, wandb_enabled=True, model_size='n'):
+    dataset_path = prepare_data(
+        prannays_edibles_path,
+        prannays_edibles_class_name_map,
+        food11_path,
+        food11_class_name_map
+    )
 
     model = init_model(model_size, reset=True)
 
-    project_name = 'BuildingBloCS Prannays Edibles Classifier'
     init_wandb(wandb_api_key, project_name, wandb_enabled)
 
     train_model(
         model=model,
-        dataset_path=split_dataset_path,
+        dataset_path=dataset_path,
         epochs=epochs,
         batch=batch,
         save_period=5,
