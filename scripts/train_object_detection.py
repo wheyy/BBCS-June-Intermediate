@@ -15,7 +15,7 @@ import wandb
 from common import object_detection_dataset_path, datasets_path, detection_project_name, init_model, init_wandb, train_model
 
 def train_object_detection(wandb_api_key: str, epochs=15, batch=32, single_cls=True, wandb_enabled=True, model_size='n', augmentation_params={}, recreate_dataset=False):
-    dataset_yaml_path, prepared_dataset_path = prepare_data(recreate=recreate_dataset)
+    dataset_yaml_path = prepare_data(recreate=recreate_dataset)
     model = init_model(model_size, reset=True)
     init_wandb(wandb_api_key, detection_project_name, wandb_enabled)
     train_model(
@@ -40,7 +40,7 @@ def prepare_data(train_split_percentage=0.7, recreate=False):
         if recreate:
             shutil.rmtree(prepared_dataset_path)
         else:
-            return dataset_yaml_path, prepared_dataset_path
+            return dataset_yaml_path
     
     prepared_dataset_path.mkdir(exist_ok=True)
 
@@ -151,7 +151,7 @@ def prepare_data(train_split_percentage=0.7, recreate=False):
     move_dataset(train_dataset, train_dataset_path)
     move_dataset(val_dataset, val_dataset_path)
 
-    return dataset_yaml_path, prepared_dataset_path
+    return dataset_yaml_path
 
 
 def get_category_dict():
