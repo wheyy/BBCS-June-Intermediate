@@ -15,7 +15,7 @@ def main():
     ]
     for params_dict in params_to_try:
         logging.info("Starting try for params: %s", params_dict)
-        train_prannays_edibles(wandb_api_key, epochs=epochs, recreate_split_dataset=False, wandb_enabled=wandb_enabled, **params_dict)
+        train_prannays_edibles(wandb_api_key, epochs=epochs, wandb_enabled=wandb_enabled, **params_dict)
 
 
 if __name__ == '__main__':
