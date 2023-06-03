@@ -10,13 +10,10 @@ def main():
     epochs = 20
     params_to_try = [
         {
-            'train_split_percentage': 0.6,
+            'batch': 32,
         },
         {
-            'train_split_percentage': 0.8,
-        },
-        {
-            'batch': 1,
+            'batch': 16,
         },
     ]
     for params_dict in params_to_try:
