@@ -32,4 +32,5 @@ Group H2
     pip install -r requirements.txt
     ```
 1. Download datasets: https://drive.google.com/drive/folders/14dO-arrgI8CARxrY0LvchHT0QHB7DuHG?usp=sharing
+    - Extract the zip files in datasets/ in their own folders that have the same name as the zip file (e.g. prannays_edibles.zip should be extracted to datasets/prannays_edibles/)
 1. Run scripts with working directory as this repo's folder
