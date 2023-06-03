@@ -17,6 +17,17 @@ food_classification_model = YOLO(str(food_classification_model_path.absolute()))
 
 object_detection_model = YOLO('yolov8n.pt')
 
+font = ImageFont.truetype('arial.ttf', size=16)
+text_kwags = {
+    'fill': (255, 255, 255),
+    'stroke_width': 4,
+    'stroke_fill': (0, 0, 0),
+}
+
+def get_scaled_font(img: Image.Image, scale=0.05):
+    return ImageFont.truetype('arial.ttf', size=max(int(img.size[1] * scale), 16))
+
+
 app = FastAPI()
 
 @app.post("/classify")
@@ -28,13 +39,17 @@ async def classify(image: UploadFile):
         object_detection_result = object_detection_model(im, conf=0.1)[0]
 
         # classify objects in each box detected and draw on image for result
-        draw = ImageDraw.Draw(im)
+        im_with_boxes_drawn = im.copy()
+        main_draw = ImageDraw.Draw(im_with_boxes_drawn)
+        cropped_images = []
+
         boxes = object_detection_result.boxes
         for box in boxes:
             # classify object in box
             class_name = object_detection_result.names[int(box.cls)]
             bounding_box = box.xyxy[0].numpy()
             cropped = im.crop(bounding_box)
+            cropped_images.append(cropped)
             
             classification_result = food_classification_model(cropped)[0]
             top3_classes = []
@@ -44,22 +59,37 @@ async def classify(image: UploadFile):
                 top3_classes.append({'class_name': class_name, 'class_confidence': class_confidence})
 
             # draw on image for result
-            draw.rectangle(bounding_box)
+            main_draw.rectangle(bounding_box)
 
             info_lines = [f'{info["class_name"]} ({info["class_confidence"] * 100:.2f}%)' for info in top3_classes]
-            info_lines.append(f"box.conf: {float(box.conf) * 100:.2f}%")
-
-            font = ImageFont.truetype('arial.ttf', size=10)
-            draw.multiline_text(
-                bounding_box[:2],
+            cropped_draw = ImageDraw.Draw(cropped)
+            cropped_draw.text(
+                (0, 0),
                 "\n".join(info_lines),
-                font=font,
-                fill=(255, 255, 255),
-                stroke_width=1,
-                stroke_fill=(0, 0, 0)
+                font=get_scaled_font(cropped),
+                **text_kwags,
             )
 
-        im.save(website_path / 'result.jpg')
+            main_draw.text(
+                bounding_box[:2],
+                f"box.conf: {float(box.conf) * 100:.2f}%",
+                font=get_scaled_font(im_with_boxes_drawn, 0.03),
+                **text_kwags
+            )
+
+        all_images = [im_with_boxes_drawn] + cropped_images
+        widths, heights = zip(*(i.size for i in all_images))
+        
+        max_width = max(widths)
+        total_height = sum(heights)
+
+        result_im = Image.new('RGB', (max_width, total_height))
+        y_offset = 0
+        for each_im in all_images:
+            result_im.paste(each_im, (0, y_offset))
+            y_offset += each_im.size[1]
+
+        result_im.save(website_path / 'result.jpg')
 
     return RedirectResponse('/', status_code=303)
 
