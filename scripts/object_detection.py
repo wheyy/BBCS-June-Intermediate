@@ -6,11 +6,12 @@ import pandas as pd
 from common import cwd, datasets_path
 
 def main():
-    model = YOLO('yolov8n.pt')
+    model = YOLO('runs/detect/train12/weights/last.pt')
     # image_to_predict_path = datasets_path / 'prannays_edibles_extended' / 'train' / 'dessert' / '2_3.jpg'
+
     image_to_predict_path = cwd / 'images_to_predict' / 'prannays_edibles' / 'wholesomeyum-Perfect-Grilled-Sirloin-Steak-500x500.jpg'
     img = Image.open(image_to_predict_path)
-    results = model(img, classes=[i for i in range(39, 56)], conf=0.1)
+    results = model(img, conf=0.1)
     for result in results:
         boxes = result.boxes
         for box in boxes:
@@ -67,5 +68,5 @@ Food-related classes:
 
 
 if __name__ == '__main__':
-    # main()
-    test()
+    main()
+    # test()
