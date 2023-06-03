@@ -2,3 +2,4 @@ wandb
 torch
 ultralytics
 scikit-image
+fastapi
