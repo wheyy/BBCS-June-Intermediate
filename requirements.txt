@@ -2,4 +2,5 @@ wandb
 torch
 ultralytics
 scikit-image
-fastapi
+fastapi[all]
+uvicorn[standard]

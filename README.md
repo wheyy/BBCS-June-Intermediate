@@ -46,5 +46,5 @@ There is a simple app that exposes an API that runs inference on images to outpu
 1. Download the model (food_classification.pt): https://drive.google.com/drive/folders/14dO-arrgI8CARxrY0LvchHT0QHB7DuHG?usp=sharing
 1. Place the model (food_classification.pt) in app/models/
 1. Ensure you have an active python virtual environment with requirements.txt dependencies installed (see [scripts setup instructions](#scripts))
-1. Run the app by running api.py
+1. Run the app by running app/api.py
 1. Open app/website/index.html and upload your image
