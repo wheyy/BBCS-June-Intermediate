@@ -4,7 +4,7 @@ import os
 from ultralytics import YOLO
 import wandb
 
-from common import project_name, cwd
+from common import project_name, cwd, datasets_path
 
 def main():
     if "WANDB_API_KEY" not in os.environ:
@@ -24,11 +24,9 @@ def main():
     model_path = wandb_downloaded_artifacts_path / 'best.pt'
     model = YOLO(model_path.absolute())
 
-    image_to_predict_path = Path('images_to_predict') / 'prannays_edibles' / 'wholesomeyum-Perfect-Grilled-Sirloin-Steak-500x500.jpg'
-    results = model(str(image_to_predict_path))
-    for result in results:
-        for i, contender in enumerate(result.probs.top5):
-            print(i, result.names[contender], f"({result.probs.top5conf[i] * 100:.2f}% confidence)")
+    dataset_path = datasets_path / 'prannays_edibles_extended'
+    metrics = model.val(str(dataset_path))
+    print(metrics)
 
 
 def get_local_model_path():
