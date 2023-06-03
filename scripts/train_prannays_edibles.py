@@ -11,7 +11,7 @@ from common import prannays_edibles_class_name_map, food11_class_name_map, prann
 
 logging.basicConfig(level=logging.INFO)
 
-def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, recreate_split_dataset=False, wandb_enabled=True):
+def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, wandb_enabled=True, model_size='n'):
     dataset_path = prepare_data(
         prannays_edibles_path,
         prannays_edibles_class_name_map,
@@ -19,7 +19,7 @@ def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, recreate_spli
         food11_class_name_map
     )
 
-    model = init_model(reset=True)
+    model = init_model(model_size, reset=True)
 
     init_wandb(wandb_api_key, project_name, wandb_enabled)
 
@@ -46,16 +46,17 @@ def init_wandb(api_key: str, project_name: str, enabled=True):
     wandb.init(project=project_name, settings=wandb.Settings(start_method="spawn"), mode='online' if enabled else 'disabled')
 
 
-def init_model(reset=True):
+def init_model(model_size: str, reset=True):
     logging.info("init_model running")
-    model_path = Path('yolov8n-cls.pt')
+    model_name = f'yolov8{model_size}-cls.pt'
+    model_path = Path(model_name)
     if reset and model_path.exists():
         model_path.unlink()
-    model = YOLO('yolov8n-cls.pt') # load pretrained model
+    model = YOLO(model_name) # load pretrained model
     return model
 
 
 if __name__ == '__main__':
     wandb_api_key = input("Enter wandb API key: ")
     wandb_enabled = wandb_api_key != 'no'
-    train_prannays_edibles(wandb_api_key, wandb_enabled=wandb_enabled, recreate_split_dataset=True)
+    train_prannays_edibles(wandb_api_key, wandb_enabled=wandb_enabled)
