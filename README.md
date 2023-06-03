@@ -5,6 +5,8 @@ Group H2
 
 ### Notebook
 
+A notebook was initially written to play around with model code. Scripts were later used to do actual training.
+
 1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/)
 1. Create Conda environment:
     ```
@@ -21,6 +23,8 @@ Group H2
 1. Make sure to download Prannay's Edibles dataset and place it (the 0,1,2,3... folders) in a folder called prannays_edibles in datasets/
 
 ### Scripts
+
+Scripts were used to prepare data and subsequently train models based on different parameters. There are also scripts for validating the model.
 
 1. Create a virtual env
     ```
