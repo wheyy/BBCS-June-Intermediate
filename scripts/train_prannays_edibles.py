@@ -3,6 +3,7 @@ from pathlib import Path
 import shutil
 import logging
 
+import torch
 from torch.utils.data import random_split
 from torchvision import datasets
 
@@ -49,8 +50,9 @@ def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, train_split_p
 
 
 def train_model(model: YOLO, dataset_path: str, epochs: int, batch: int, save_period: int):
-    logging.info("train_model running")
-    model.train(data=dataset_path, batch=batch, epochs=epochs, save_period=save_period)
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    logging.info("train_model running with device %s", device)
+    model.train(data=dataset_path, batch=batch, epochs=epochs, save_period=save_period, device=device)
 
 
 def init_wandb(api_key: str, project_name: str, enabled=True):
