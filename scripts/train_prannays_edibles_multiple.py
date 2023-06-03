@@ -10,10 +10,10 @@ def main():
     epochs = 20
     params_to_try = [
         {
-            'batch': 32,
+            'batch': 2,
         },
         {
-            'batch': 16,
+            'batch': 4,
         },
     ]
     for params_dict in params_to_try:
