@@ -11,9 +11,7 @@ def main():
     params_to_try = [
         {
             'model_size': 'n',
-        },
-        {
-            'model_size': 'l',
+            'batch': 2,
         },
     ]
     for params_dict in params_to_try:
