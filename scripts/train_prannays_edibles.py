@@ -11,7 +11,7 @@ from common import prannays_edibles_class_name_map, food11_class_name_map, prann
 
 logging.basicConfig(level=logging.INFO)
 
-def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, wandb_enabled=True, model_size='n'):
+def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, wandb_enabled=True, model_size='n', augmentation_params={}):
     dataset_path = prepare_data(
         prannays_edibles_path,
         prannays_edibles_class_name_map,
@@ -29,15 +29,16 @@ def train_prannays_edibles(wandb_api_key: str, epochs=15, batch=4, wandb_enabled
         epochs=epochs,
         batch=batch,
         save_period=5,
+        augmentation_params=augmentation_params,
     )
 
     wandb.finish()
 
 
-def train_model(model: YOLO, dataset_path: str, epochs: int, batch: int, save_period: int):
+def train_model(model: YOLO, dataset_path: str, epochs: int, batch: int, save_period: int, augmentation_params: dict):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     logging.info("train_model running with device %s", device)
-    model.train(data=dataset_path, batch=batch, epochs=epochs, save_period=save_period, device=device.index, workers=16)
+    model.train(data=dataset_path, batch=batch, epochs=epochs, save_period=save_period, device=device.index, workers=16, **augmentation_params)
 
 
 def init_wandb(api_key: str, project_name: str, enabled=True):
@@ -59,4 +60,4 @@ def init_model(model_size: str, reset=True):
 if __name__ == '__main__':
     wandb_api_key = input("Enter wandb API key: ")
     wandb_enabled = wandb_api_key != 'no'
-    train_prannays_edibles(wandb_api_key, wandb_enabled=wandb_enabled)
+    train_prannays_edibles(wandb_api_key, wandb_enabled=wandb_enabled, augmentation_params={'augment': True})

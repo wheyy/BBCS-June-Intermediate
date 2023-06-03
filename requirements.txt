@@ -1,5 +1,6 @@
 wandb
 torch
+albumentations
 ultralytics
 scikit-image
 fastapi[all]
