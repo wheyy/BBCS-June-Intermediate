@@ -22,9 +22,7 @@ app = FastAPI()
 @app.post("/classify")
 async def classify(image: UploadFile):
     with Image.open(image.file) as im:
-        print(im.mode)
         im = im.convert('RGB') # handle .png files
-        print(im.mode)
 
         # run object detection inference
         object_detection_result = object_detection_model(im, conf=0.1)[0]
