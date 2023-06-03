@@ -3,6 +3,8 @@ Group H2
 
 ## Setup
 
+### Notebook
+
 1. Install [Anaconda](https://docs.anaconda.com/free/anaconda/install/)
 1. Create Conda environment:
     ```
@@ -17,3 +19,17 @@ Group H2
     jupyter notebook
     ```
 1. Make sure to download Prannay's Edibles dataset and place it (the 0,1,2,3... folders) in a folder called prannays_edibles in datasets/
+
+### Scripts
+
+1. Create a virtual env
+    ```
+    python -m venv venv
+    ```
+1. Activate environment
+1. Install requirements
+    ```
+    pip install -r requirements.txt
+    ```
+1. Download datasets: https://drive.google.com/drive/folders/14dO-arrgI8CARxrY0LvchHT0QHB7DuHG?usp=sharing
+1. Run scripts with working directory as this repo's folder

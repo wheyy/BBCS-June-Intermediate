@@ -27,10 +27,11 @@ food11_class_name_map = {
     'Rice': 'rice',
     'Seafood': 'seafood',
     'Soup': 'soup',
-    'Vegetable-Friut': 'vegetables'
+    'Vegetable-Fruit': 'vegetables'
 }
 
 cwd = Path.cwd()
 
 datasets_path = cwd / "datasets"
 prannays_edibles_path = datasets_path / "prannays_edibles"
+food11_path = datasets_path / "food11"
