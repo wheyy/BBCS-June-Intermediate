@@ -5,3 +5,4 @@ ultralytics
 scikit-image
 fastapi[all]
 uvicorn[standard]
+opencv-python
