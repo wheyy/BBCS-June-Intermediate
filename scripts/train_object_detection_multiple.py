@@ -13,7 +13,8 @@ def main():
     params_to_try = [
         {
             'batch': 12,
-            'augmentation_params': finetuning_hyp
+            'imgsz': 640,
+            'augmentation_params': finetuning_hyp,
         },
     ]
     for params_dict in params_to_try:

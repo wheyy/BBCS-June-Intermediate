@@ -14,7 +14,7 @@ import wandb
 
 from common import object_detection_dataset_path, datasets_path, detection_project_name, init_model, init_wandb, train_model
 
-def train_object_detection(wandb_api_key: str, epochs=15, batch=32, imgsz=640, single_cls=True, wandb_enabled=True, model_size='n', augmentation_params={}, recreate_dataset=False, val=True):
+def train_object_detection(wandb_api_key: str, epochs=15, batch=32, imgsz=320, single_cls=True, wandb_enabled=True, model_size='n', augmentation_params={}, recreate_dataset=False, val=True):
     dataset_yaml_path = prepare_data(recreate=recreate_dataset)
     model = init_model(model_size, reset=True)
     init_wandb(wandb_api_key, detection_project_name, wandb_enabled)
@@ -166,4 +166,4 @@ def get_category_dict():
 if __name__ == '__main__':
     wandb_api_key = input("Enter wandb API key: ")
     wandb_enabled = wandb_api_key != 'no'
-    train_object_detection(wandb_api_key, batch=256, imgsz=64, wandb_enabled=wandb_enabled, augmentation_params={'augment': True})
+    train_object_detection(wandb_api_key, wandb_enabled=wandb_enabled, val=False, augmentation_params={'augment': True})
