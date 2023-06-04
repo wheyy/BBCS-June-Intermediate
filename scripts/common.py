@@ -44,6 +44,8 @@ prannays_edibles_dataset_path = datasets_path / "prannays_edibles"
 food11_dataset_path = datasets_path / "food11"
 object_detection_dataset_path = datasets_path / "UECFOOD100"
 
+finetuning_hyp = {'box': 0.0539, 'cls': 0.299, 'lr0': 0.00258, 'lrf': 0.17, 'hsv_h': 0.0188, 'hsv_s': 0.704, 'hsv_v': 0.36, 'mixup': 0, 'scale': 0.491, 'shear': 0, 'fliplr': 0.5, 'flipud': 0, 'mosaic': 1, 'degrees': 0, 'momentum': 0.779, 'translate': 0.0902, 'perspective': 0, 'weight_decay': 0.00058, 'warmup_epochs': 1.33, 'warmup_bias_lr': 0.0711, 'warmup_momentum': 0.86, 'iou': 0.2}
+
 def init_wandb(api_key: str, project_name: str, enabled=True):
     logging.info("init_wandb running")
     os.environ["WANDB_API_KEY"] = api_key
