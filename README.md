@@ -1,6 +1,11 @@
 # BBCS-June-Intermediate
 Group H2
 
+## Links
+
+1. Drive with dataset and models: https://drive.google.com/drive/folders/14dO-arrgI8CARxrY0LvchHT0QHB7DuHG?usp=sharing
+1. Figma: https://tinyurl.com/BBCSJuneH2figma
+
 ## Setup
 
 ### Notebook
