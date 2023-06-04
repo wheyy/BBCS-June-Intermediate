@@ -52,7 +52,7 @@ def init_wandb(api_key: str, project_name: str, enabled=True):
     wandb.init(project=project_name, settings=wandb.Settings(start_method="spawn"), mode='online' if enabled else 'disabled')
 
 
-def train_model(model: YOLO, dataset_path: str, epochs: int, batch: int, save_period: int, augmentation_params: dict, single_cls=None, imgsz=None, val=None):
+def train_model(model: YOLO, dataset_path: str, epochs: int, batch: int, save_period: int, augmentation_params: dict, single_cls=None, imgsz=None, val=True):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     logging.info("train_model running with device %s", device)
     model.train(data=dataset_path, batch=batch, epochs=epochs, save_period=save_period, device=device.index, workers=16, single_cls=single_cls, imgsz=imgsz, val=val, **augmentation_params)
