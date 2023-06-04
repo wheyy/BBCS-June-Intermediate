@@ -15,7 +15,8 @@ website_path = app_path / 'website'
 food_classification_model_path = models_path / 'food_classification.pt'
 food_classification_model = YOLO(str(food_classification_model_path.absolute()))
 
-object_detection_model = YOLO('yolov8n.pt')
+food_classification_model_path = models_path / 'food_object_detection.pt'
+food_object_detection_model = YOLO(str(food_classification_model_path.absolute()))
 
 font = ImageFont.truetype('arial.ttf', size=16)
 text_kwags = {
@@ -25,7 +26,7 @@ text_kwags = {
 }
 
 def get_scaled_font(img: Image.Image, scale=0.05):
-    return ImageFont.truetype('arial.ttf', size=max(int(img.size[1] * scale), 16))
+    return ImageFont.truetype('arial.ttf', size=max(int(img.size[1] * scale), 12))
 
 
 app = FastAPI()
@@ -36,7 +37,7 @@ async def classify(image: UploadFile):
         im = im.convert('RGB') # handle .png files
 
         # run object detection inference
-        object_detection_result = object_detection_model(im, conf=0.1)[0]
+        object_detection_result = food_object_detection_model(im, conf=0.02, iou=0.3)[0]
 
         # classify objects in each box detected and draw on image for result
         im_with_boxes_drawn = im.copy()
@@ -73,7 +74,7 @@ async def classify(image: UploadFile):
             main_draw.text(
                 bounding_box[:2],
                 f"box.conf: {float(box.conf) * 100:.2f}%",
-                font=get_scaled_font(im_with_boxes_drawn, 0.03),
+                font=get_scaled_font(im_with_boxes_drawn, 0.02),
                 **text_kwags
             )
 
