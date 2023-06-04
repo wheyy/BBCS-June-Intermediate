@@ -1,5 +1,6 @@
 
 from train_object_detection import train_object_detection
+from common import finetuning_hyp
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -8,19 +9,11 @@ def main():
     wandb_api_key = input("Enter wandb API key: ")
     wandb_enabled = wandb_api_key != 'no'
 
-    epochs = 15
+    epochs = 20
     params_to_try = [
         {
-            'batch': 128,
-        },
-        {
-            'batch': 64,
-        },
-        {
-            'batch': 32,
-        },
-        {
-            'batch': 16,
+            'batch': 12,
+            'augmentation_params': finetuning_hyp
         },
     ]
     for params_dict in params_to_try:
