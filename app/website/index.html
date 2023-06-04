@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>BuildingBloCS Group H2 - Food Classification</title>
+    </head>
+    <body>
+        <form method="POST" enctype="multipart/form-data" action="/classify">
+            <div>
+                <label for="image">Upload food image</label>
+            </div>
+            <div>
+                <input type="file" name="image" required />
+            </div>
+            <br>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        <object data="result.jpg" type="image/png" style="max-width: 50%;">
+            Results will be shown here after uploading
+        </object>
+    </body>
+</html>
